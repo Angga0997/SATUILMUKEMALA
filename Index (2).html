@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Satu Ilmu Kemala — Materi Kuliah PKN STAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon-950:#3d0f18;
+    --maroon-800:#6e1423;
+    --maroon-700:#83192a;
+    --cream:#f7f1e3;
+    --cream-dim:#ede4cd;
+    --ink:#221912;
+    --gold:#c9a227;
+    --teal:#3f7068;
+    --copper:#b5562e;
+    --line: rgba(34,25,18,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  h1,h2,h3,.display{font-family:'Fraunces', serif;}
+  a{color:inherit;}
+  img,svg{display:block; max-width:100%;}
+
+  /* ---------- Tapis pattern (signature motif) ---------- */
+  .tapis-divider{
+    width:100%;
+    height:14px;
+    background-image:
+      linear-gradient(45deg, var(--gold) 25%, transparent 25%),
+      linear-gradient(-45deg, var(--gold) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, var(--gold) 75%),
+      linear-gradient(-45deg, transparent 75%, var(--gold) 75%);
+    background-size: 14px 14px;
+    background-position: 0 0, 0 7px, 7px -7px, -7px 0px;
+    background-color: var(--maroon-800);
+    opacity:0.9;
+  }
+
+  /* ---------- Header / Nav ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:var(--maroon-800);
+    color:var(--cream);
+    border-bottom:1px solid rgba(247,241,227,0.15);
+  }
+  .nav-wrap{
+    max-width:1180px; margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none;}
+  .brand-mark{
+    width:38px; height:38px; flex:none;
+  }
+  .brand-text .name{font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem; letter-spacing:0.01em;}
+  .brand-text .sub{font-family:'IBM Plex Mono', monospace; font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; opacity:0.7;}
+  nav.links{display:flex; gap:22px; font-size:0.88rem;}
+  nav.links a{text-decoration:none; opacity:0.85; border-bottom:1px solid transparent; padding-bottom:2px;}
+  nav.links a:hover{opacity:1; border-color:var(--gold);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(ellipse 900px 500px at 85% -10%, rgba(201,162,39,0.16), transparent 60%),
+      var(--maroon-800);
+    color:var(--cream);
+    overflow:hidden;
+  }
+  .hero-inner{
+    max-width:1180px; margin:0 auto; padding:88px 24px 72px;
+    display:grid; grid-template-columns: 1.15fr 0.85fr; gap:48px; align-items:center;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.16em;
+    text-transform:uppercase; color:var(--gold); margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--gold); display:block;}
+  .hero h1{
+    font-size:clamp(2.6rem, 5vw, 4.1rem);
+    font-weight:600; line-height:1.03; letter-spacing:-0.01em;
+    margin-bottom:22px;
+  }
+  .hero h1 em{font-style:italic; color:var(--gold); font-weight:500;}
+  .hero p.lede{font-size:1.08rem; max-width:46ch; opacity:0.86; margin-bottom:32px;}
+  .hero-cta{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 22px; border-radius:3px; font-weight:600; font-size:0.92rem;
+    text-decoration:none; border:1px solid transparent; cursor:pointer;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-gold{background:var(--gold); color:var(--maroon-950);}
+  .btn-gold:hover{background:#dab53a;}
+  .btn-ghost{background:transparent; color:var(--cream); border-color:rgba(247,241,227,0.35);}
+  .btn-ghost:hover{border-color:var(--gold); color:var(--gold);}
+
+  .hero-figure{position:relative;}
+  .siger-svg{width:100%; height:auto;}
+
+  .hero-stats{
+    display:flex; gap:0; margin-top:44px; border-top:1px solid rgba(247,241,227,0.18); padding-top:22px;
+  }
+  .hero-stats .stat{padding-right:34px; margin-right:34px; border-right:1px solid rgba(247,241,227,0.18);}
+  .hero-stats .stat:last-child{border-right:none;}
+  .hero-stats .num{font-family:'Fraunces',serif; font-size:1.7rem; color:var(--gold);}
+  .hero-stats .lab{font-family:'IBM Plex Mono', monospace; font-size:0.65rem; letter-spacing:0.08em; text-transform:uppercase; opacity:0.75;}
+
+  /* ---------- Notice ---------- */
+  .notice{
+    max-width:1180px; margin:0 auto; padding:16px 24px 0;
+  }
+  .notice-box{
+    background:var(--cream-dim); border:1px dashed var(--maroon-800);
+    border-radius:4px; padding:14px 18px; font-size:0.86rem; color:var(--maroon-950);
+    display:flex; gap:10px;
+  }
+  .notice-box b{color:var(--maroon-800);}
+
+  /* ---------- Jurusan selector ---------- */
+  section.picker{max-width:1180px; margin:0 auto; padding:64px 24px 8px;}
+  .section-head{margin-bottom:28px;}
+  .section-head .kicker{
+    font-family:'IBM Plex Mono', monospace; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--maroon-800); margin-bottom:8px;
+  }
+  .section-head h2{font-size:1.9rem; font-weight:600;}
+
+  .jurusan-tabs{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; margin-bottom:8px;
+  }
+  .jtab{
+    text-align:left; cursor:pointer;
+    background:#fff; border:1px solid var(--line); border-radius:6px;
+    padding:20px 20px 18px; position:relative; overflow:hidden;
+    transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+  }
+  .jtab:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(34,25,18,0.08);}
+  .jtab::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--accent, var(--gold));
+  }
+  .jtab .kode{font-family:'IBM Plex Mono', monospace; font-size:0.7rem; letter-spacing:0.1em; color:var(--accent, var(--gold)); font-weight:600;}
+  .jtab .nama{font-family:'Fraunces', serif; font-size:1.22rem; font-weight:600; margin:6px 0 8px; line-height:1.2;}
+  .jtab .desk{font-size:0.85rem; color:#544a3f; line-height:1.45;}
+  .jtab.active{border-color:var(--accent, var(--gold)); box-shadow:0 10px 26px rgba(34,25,18,0.1);}
+  .jtab.active .nama{color:var(--maroon-800);}
+
+  /* ---------- Semester selector ---------- */
+  .semester-rail{
+    display:flex; gap:8px; overflow-x:auto; padding:26px 0 6px;
+    scrollbar-width:none;
+  }
+  .semester-rail::-webkit-scrollbar{display:none;}
+  .sem-pill{
+    flex:none; padding:9px 16px; border-radius:999px; border:1px solid var(--line);
+    background:#fff; font-family:'IBM Plex Mono', monospace; font-size:0.78rem; letter-spacing:0.03em;
+    cursor:pointer; white-space:nowrap; transition:all .15s ease; color:var(--ink);
+  }
+  .sem-pill:hover{border-color:var(--accent, var(--maroon-800));}
+  .sem-pill.active{
+    background:var(--maroon-800); border-color:var(--maroon-800); color:var(--cream);
+  }
+
+  /* ---------- Course grid ---------- */
+  section.courses{max-width:1180px; margin:0 auto; padding:12px 24px 90px;}
+  .course-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:18px;
+  }
+  .course-card{
+    background:#fff; border:1px solid var(--line); border-radius:6px; padding:20px;
+    display:flex; flex-direction:column; gap:10px; min-height:150px;
+    transition:box-shadow .15s ease, border-color .15s ease;
+  }
+  .course-card:hover{box-shadow:0 10px 24px rgba(34,25,18,0.08); border-color:var(--accent,var(--gold));}
+  .course-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+  .course-kode{font-family:'IBM Plex Mono', monospace; font-size:0.68rem; color:var(--accent, var(--gold)); font-weight:600; letter-spacing:0.06em;}
+  .course-sks{font-family:'IBM Plex Mono', monospace; font-size:0.68rem; color:#8a7f70; border:1px solid var(--line); padding:2px 7px; border-radius:999px; flex:none;}
+  .course-name{font-family:'Fraunces', serif; font-size:1.06rem; font-weight:600; line-height:1.28; flex:1;}
+  .course-link{
+    margin-top:auto; display:inline-flex; align-items:center; gap:6px;
+    font-size:0.82rem; font-weight:700; color:var(--maroon-800); text-decoration:none;
+  }
+  .course-link:hover{color:var(--accent, var(--gold));}
+  .course-link svg{width:13px; height:13px;}
+
+  .empty-state{
+    grid-column:1/-1; text-align:center; padding:60px 20px; color:#8a7f70; font-size:0.92rem;
+  }
+
+  /* ---------- About / how it works ---------- */
+  .about-band{background:var(--cream-dim); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .about-inner{
+    max-width:1180px; margin:0 auto; padding:64px 24px; display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:start;
+  }
+  .about-inner h2{font-size:1.7rem; font-weight:600; margin-bottom:14px;}
+  .about-inner p{color:#544a3f; font-size:0.96rem; max-width:42ch;}
+  .steps{display:flex; flex-direction:column; gap:0;}
+  .step{display:flex; gap:16px; padding:18px 0; border-bottom:1px solid var(--line);}
+  .step:last-child{border-bottom:none;}
+  .step .n{font-family:'Fraunces', serif; font-size:1.3rem; color:var(--gold); flex:none; width:34px;}
+  .step h3{font-size:1.02rem; font-weight:700; margin-bottom:4px;}
+  .step p{font-size:0.88rem; color:#544a3f;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--maroon-950); color:var(--cream);}
+  .footer-inner{max-width:1180px; margin:0 auto; padding:50px 24px 30px; display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+  .footer-brand .name{font-family:'Fraunces', serif; font-size:1.15rem; font-weight:600;}
+  .footer-brand p{font-size:0.82rem; opacity:0.65; max-width:34ch; margin-top:8px;}
+  .footer-cols{display:flex; gap:56px; flex-wrap:wrap;}
+  .footer-col .h{font-family:'IBM Plex Mono', monospace; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; opacity:0.6; margin-bottom:12px;}
+  .footer-col a{display:block; font-size:0.85rem; text-decoration:none; opacity:0.85; margin-bottom:9px;}
+  .footer-col a:hover{opacity:1; color:var(--gold);}
+  .footer-bottom{
+    max-width:1180px; margin:0 auto; padding:18px 24px 34px; font-size:0.75rem; opacity:0.5;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  @media (max-width:880px){
+    .hero-inner{grid-template-columns:1fr; padding-top:56px;}
+    .hero-figure{order:-1; max-width:220px; margin:0 auto 12px;}
+    .jurusan-tabs{grid-template-columns:1fr;}
+    .course-grid{grid-template-columns:1fr 1fr;}
+    .about-inner{grid-template-columns:1fr;}
+    nav.links{display:none;}
+  }
+  @media (max-width:560px){
+    .course-grid{grid-template-columns:1fr;}
+    .hero-stats{flex-wrap:wrap; row-gap:16px;}
+    .hero-stats .stat{padding-right:20px; margin-right:20px;}
+  }
+
+  :focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-wrap">
+    <a class="brand" href="#top">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none">
+        <rect width="40" height="40" rx="4" fill="#C9A227"/>
+        <path d="M20 6L26 16H14L20 6Z" fill="#3d0f18"/>
+        <path d="M8 34L14 18H26L32 34" stroke="#3d0f18" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <circle cx="20" cy="24" r="2.4" fill="#3d0f18"/>
+      </svg>
+      <span class="brand-text">
+        <span class="name" style="display:block;">Satu Ilmu Kemala</span>
+        <span class="sub">Biro Pendidikan · Organda Lampung</span>
+      </span>
+    </a>
+    <nav class="links">
+      <a href="#pilih-jurusan">Materi</a>
+      <a href="#cara-pakai">Cara Pakai</a>
+      <a id="nav-drive" href="#" target="_blank" rel="noopener">Google Drive</a>
+    </nav>
+  </div>
+</header>
+<div class="tapis-divider"></div>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Arsip Materi Kuliah PKN STAN</div>
+        <h1>Satu ilmu,<br><em>seruwai</em> perjuangan.</h1>
+        <p class="lede">Kumpulan materi kuliah semester I–VIII untuk tiga jurusan PKN STAN, disusun oleh Biro Pendidikan organisasi daerah Lampung agar lebih mudah dicari, dipelajari, dan diwariskan ke adik tingkat.</p>
+        <div class="hero-cta">
+          <a class="btn btn-gold" href="#pilih-jurusan">Jelajahi Materi</a>
+          <a class="btn btn-ghost" id="hero-drive-btn" href="#" target="_blank" rel="noopener">Buka Google Drive ↗</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><div class="num">3</div><div class="lab">Jurusan</div></div>
+          <div class="stat"><div class="num">8</div><div class="lab">Semester</div></div>
+          <div class="stat"><div class="num" id="stat-matkul">–</div><div class="lab">Mata Kuliah</div></div>
+        </div>
+      </div>
+      <div class="hero-figure">
+        <svg class="siger-svg" viewBox="0 0 300 320" fill="none">
+          <defs>
+            <linearGradient id="gg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#e8c65a"/>
+              <stop offset="1" stop-color="#a3811c"/>
+            </linearGradient>
+          </defs>
+          <g stroke="url(#gg)" stroke-width="3" fill="none" stroke-linejoin="round">
+            <path d="M40 260 L40 200 L70 120 L90 200 L110 90 L130 200 L150 60 L170 200 L190 90 L210 200 L230 120 L260 200 L260 260 Z"/>
+          </g>
+          <g fill="#c9a227">
+            <circle cx="70" cy="120" r="5"/>
+            <circle cx="110" cy="90" r="5"/>
+            <circle cx="150" cy="60" r="6"/>
+            <circle cx="190" cy="90" r="5"/>
+            <circle cx="230" cy="120" r="5"/>
+          </g>
+          <line x1="40" y1="260" x2="260" y2="260" stroke="#c9a227" stroke-width="3"/>
+          <g stroke="#c9a227" stroke-width="1.4" opacity="0.6">
+            <path d="M40 275 l10 10 10 -10 10 10 10 -10 10 10 10 -10 10 10 10 -10 10 10 10 -10 10 10 10 -10 10 10 10 -10 10 10 10 -10 10 10 10 -10 10 10"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="notice">
+    <div class="notice-box">
+      <span>ℹ️</span>
+      <span><b>Catatan pengelola:</b> daftar mata kuliah sudah mengikuti kurikulum resmi (SK Direktur PKN STAN KEP-301/KEP-299/KEP-300 Tahun 2024). Yang masih perlu dilengkapi hanya <b>tautan folder Drive per mata kuliah</b> — saat ini semua tombol "Buka Materi" masih mengarah ke folder Drive utama. Sesuaikan lewat berkas data di bagian akhir kode, lihat komentar <span class="mono">MULAI EDIT DI SINI</span>.</span>
+    </div>
+  </div>
+
+  <section class="picker" id="pilih-jurusan">
+    <div class="section-head">
+      <div class="kicker">01 — Pilih Jurusan</div>
+      <h2>Tiga jurusan, satu arsip.</h2>
+    </div>
+    <div class="jurusan-tabs" id="jurusan-tabs"></div>
+
+    <div class="semester-rail" id="semester-rail"></div>
+    <div class="semester-rail" id="peminatan-rail" style="padding-top:4px;"></div>
+  </section>
+
+  <section class="courses">
+    <div class="course-grid" id="course-grid"></div>
+  </section>
+
+  <section class="about-band" id="cara-pakai">
+    <div class="about-inner">
+      <div>
+        <div class="section-head" style="margin-bottom:0;">
+          <div class="kicker">02 — Cara Pakai</div>
+          <h2>Sederhana, tinggal klik.</h2>
+        </div>
+        <p>Portal ini hanya jembatan menuju folder Google Drive yang sudah dirapikan Biro Pendidikan. Materinya sendiri tetap tersimpan dan diperbarui langsung di Drive.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="n">01</div>
+          <div><h3>Pilih jurusan kamu</h3><p>Manajemen Keuangan Negara, Manajemen Aset Publik, atau Akuntansi Sektor Publik.</p></div>
+        </div>
+        <div class="step">
+          <div class="n">02</div>
+          <div><h3>Pilih semester</h3><p>Geser panel semester I sampai VIII, lalu lihat daftar mata kuliahnya.</p></div>
+        </div>
+        <div class="step">
+          <div class="n">03</div>
+          <div><h3>Buka materinya</h3><p>Klik "Buka Materi" pada mata kuliah yang dicari — akan terbuka folder Drive terkait di tab baru.</p></div>
+        </div>
+        <div class="step">
+          <div class="n">04</div>
+          <div><h3>Bagikan ke rekan</h3><p>Simpan tautan halaman ini dan bagikan ke teman satu daerah supaya arsipnya makin sering dipakai.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="name">Satu Ilmu Kemala</div>
+      <p>Arsip materi kuliah PKN STAN yang dirawat oleh Biro Pendidikan organisasi daerah Lampung, untuk dipakai bersama dan diwariskan ke angkatan berikutnya.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="h">Jurusan</div>
+        <a href="#" data-jump="mkn">Manajemen Keuangan Negara</a>
+        <a href="#" data-jump="map">Manajemen Aset Publik</a>
+        <a href="#" data-jump="asp">Akuntansi Sektor Publik</a>
+      </div>
+      <div class="footer-col">
+        <div class="h">Tautan</div>
+        <a href="#" id="footer-drive" target="_blank" rel="noopener">Google Drive Utama</a>
+        <a href="#cara-pakai">Cara Pakai</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span id="year"></span> Biro Pendidikan — Organda Lampung.</span>
+    <span>Dibuat dengan seruwai iwa untuk sesama perantau ilmu.</span>
+  </div>
+</footer>
+
+<script>
+/* ======================================================================
+   MULAI EDIT DI SINI
+   ----------------------------------------------------------------------
+   1) MASTER_DRIVE_LINK -> tautan folder Google Drive utama (fallback).
+   2) JURUSAN_LIST       -> ganti nama/deskripsi jurusan bila perlu.
+   3) PEMINATAN          -> daftar konsentrasi/peminatan tiap jurusan.
+   4) DATA               -> kurikulum resmi (SK Direktur PKN STAN 2024) per semester.
+      - Semester tanpa peminatan   -> DATA[jurusan][semester] = array mata kuliah.
+      - Semester dengan peminatan -> DATA[jurusan][semester] = { branch:true, byTrack:{ a:[...], b:[...] } }
+      - Tiap mata kuliah: { kode, nama, sks, link? } - "link" opsional, default ke MASTER_DRIVE_LINK.
+   ====================================================================== */
+
+const MASTER_DRIVE_LINK = "https://drive.google.com/drive/folders/1nm5r9ByWK9wAMjUgIVC07jucyxakFKhC";
+
+const JURUSAN_LIST = [
+  { id:"mkn", kode:"MKN", nama:"Manajemen Keuangan Negara", warna:"#c9a227",
+    deskripsi:"Perbendaharaan, kas negara, dan pengelolaan keuangan pemerintah pusat & daerah." },
+  { id:"map", kode:"MAP", nama:"Manajemen Aset Publik", warna:"#3f7068",
+    deskripsi:"Manajemen aset, penilaian properti, dan lelang barang milik negara." },
+  { id:"asp", kode:"ASP", nama:"Akuntansi Sektor Publik", warna:"#b5562e",
+    deskripsi:"Akuntansi pemerintahan, audit, dan pelaporan keuangan instansi publik." },
+];
+
+const PEMINATAN = {
+  mkn: [
+    { id:"a", label:"Manajemen Penerimaan Negara" },
+    { id:"b", label:"Manajemen Treasuri Negara" },
+  ],
+  asp: [
+    { id:"a", label:"Audit" },
+    { id:"b", label:"Pengawasan & Pemeriksaan Penerimaan Negara" },
+    { id:"c", label:"Sistem Informasi" },
+  ],
+  map: [
+    { id:"a", label:"Manajemen & Perencanaan Aset Strategis" },
+    { id:"b", label:"Penilaian Bisnis & Properti" },
+    { id:"c", label:"Lelang" },
+  ],
+};
+
+/* Kurikulum resmi berdasarkan:
+   - KEP-301/PKN/2024 (Manajemen Keuangan Negara)
+   - KEP-299/PKN/2024 (Akuntansi Sektor Publik)
+   - KEP-300/PKN/2024 (Manajemen Aset Publik) */
+const DATA = {"mkn": {"1": [{"kode": "MKN 2501", "nama": "Agama", "sks": 2}, {"kode": "MKN 2502", "nama": "Bahasa Indonesia", "sks": 2}, {"kode": "MKN 2505", "nama": "Pancasila", "sks": 2}, {"kode": "MKN 2523", "nama": "Pengantar Akuntansi I", "sks": 3}, {"kode": "MKN 2525", "nama": "Pengantar Ilmu Ekonomi", "sks": 2}, {"kode": "MKN 2526", "nama": "Pengantar Ilmu Hukum", "sks": 2}, {"kode": "MKN 2507", "nama": "Pengantar Pengelolaan Keuangan Negara", "sks": 3}, {"kode": "MKN 2528", "nama": "Pengantar Teknologi Informasi dan Komputer", "sks": 2}], "2": [{"kode": "MKN 2510", "nama": "Bahasa Inggris", "sks": 2, "link": "https://drive.google.com/drive/folders/1rC-O48DHa8ANPDTd5IPOfvuvatoxuCa7?usp=drive_link"}, {"kode": "MKN 2512", "nama": "Ekonomi Mikro", "sks": 3, "link": "https://drive.google.com/drive/folders/1Wf1DP5aarLTlfDmEzwhRJkLd8QMIcOfa?usp=drive_link"}, {"kode": "MKN 2513", "nama": "Pendidikan Antikorupsi", "sks": 2, "link": "https://drive.google.com/drive/folders/1g4Ad5WdYh_kRH31ED4Bga1GUrG9D3HxO?usp=drive_link"}, {"kode": "MKN 2515", "nama": "Hukum Perdata", "sks": 2, "link": "https://drive.google.com/drive/folders/1821xCffHSzO0wGY_pNZrEnQq9vnSqN0b?usp=drive_link"}, {"kode": "MKN 2503", "nama": "Kewarganegaraan", "sks": 2, "link": "https://drive.google.com/drive/folders/1SaTMtLzZsFzHT8z0p1zS76XRXGREOlt5?usp=drive_link"}, {"kode": "MKN 2518", "nama": "Manajemen Keuangan", "sks": 3, "link": "https://drive.google.com/drive/folders/1GGHOLL4uG4jHTbd-UUbAfKE-desUAGIP?usp=drive_link"}, {"kode": "MKN 2524", "nama": "Pengantar Akuntansi II", "sks": 3, "link": "https://drive.google.com/drive/folders/1QKCfAAmaJeVpEYOJOmkwcwx1ujF-Rh1w?usp=drive_link"}, {"kode": "MKN 2529", "nama": "Statistika Terapan", "sks": 2, "link": "https://drive.google.com/drive/folders/1ZgCIrJV5ghNsCTdgdySyRd6X7y97iZ5u?usp=drive_link"}], "3": [{"kode": "MKN 2508", "nama": "Akuntansi Biaya", "sks": 3}, {"kode": "MKN 2509", "nama": "Akuntansi Keuangan Menengah", "sks": 3}, {"kode": "MKN 2511", "nama": "Ekonometrika", "sks": 2}, {"kode": "MKN 2506", "nama": "Ekonomi Makro dan Kebijakan Fiskal", "sks": 3}, {"kode": "MKN 2514", "nama": "Hukum Administrasi Negara", "sks": 2}, {"kode": "MKN 2517", "nama": "Keuangan Publik", "sks": 3}, {"kode": "MKN 2522", "nama": "Penganggaran Sektor Publik", "sks": 2}, {"kode": "MKN 2527", "nama": "Pengantar Perpajakan", "sks": 2}], "4": {"branch": true, "byTrack": {"a": [{"kode": "MKN 2519", "nama": "Manajemen Penerimaan Negara Bukan Pajak", "sks": 2}, {"kode": "MKN 2538", "nama": "Pajak dan Retribusi Daerah Terapan", "sks": 3}, {"kode": "MKN 2539", "nama": "Pajak Penghasilan Terapan", "sks": 3}, {"kode": "MKN 2540", "nama": "Pajak Pertambahan Nilai dan Pajak Tidak Langsung Lainnya", "sks": 3}, {"kode": "MKN 2542", "nama": "Pengantar Cukai", "sks": 2}, {"kode": "MKN 2543", "nama": "Pengantar Kepabeanan", "sks": 3}, {"kode": "MKN 2544", "nama": "Perdagangan Internasional", "sks": 2}], "b": [{"kode": "MKN 2550", "nama": "Akuntansi Pemerintah Pusat", "sks": 2}, {"kode": "MKN 2553", "nama": "Analitika Data Sektor Publik", "sks": 2}, {"kode": "MKN 2554", "nama": "Ekonomi Pembangunan", "sks": 3}, {"kode": "MKN 2555", "nama": "Hubungan Keuangan Pusat dan Daerah", "sks": 3}, {"kode": "MKN 2519", "nama": "Manajemen Penerimaan Negara Bukan Pajak", "sks": 2}, {"kode": "MKN 2561", "nama": "Manajemen Pengadaan Barang/Jasa Pemerintah", "sks": 2}, {"kode": "MKN 2566", "nama": "Penganggaran Belanja Negara", "sks": 2}, {"kode": "MKN 2570", "nama": "Sistem dan Kebijakan Sektor Keuangan", "sks": 3}, {"kode": "MKN 2571", "nama": "Teori Kebijakan Publik", "sks": 2}]}}, "5": {"branch": true, "byTrack": {"a": [{"kode": "MKN 2532", "nama": "Analisis Potensi Penerimaan Negara", "sks": 3}, {"kode": "MKN 2534", "nama": "Ketentuan Umum dan Tata Cara Perpajakan", "sks": 3}, {"kode": "MKN 2521", "nama": "Metodologi Penelitian", "sks": 3}, {"kode": "MKN 2537", "nama": "Nomenklatur Harmonized System Code", "sks": 3}, {"kode": "MKN 2541", "nama": "Pemotongan dan Pemungutan Pajak Penghasilan Terapan", "sks": 3}, {"kode": "MKN 2546", "nama": "Praktikum Cukai", "sks": 2}, {"kode": "MKN 2549", "nama": "Sistem Nilai Pabean", "sks": 3}, {"kode": "MKN 2572–75", "nama": "Mata Kuliah Elektif (pilih 1)", "sks": 3}], "b": [{"kode": "MKN 2558", "nama": "Manajemen Kas Negara", "sks": 2}, {"kode": "MKN 2560", "nama": "Manajemen Keuangan Daerah dan Desa", "sks": 3}, {"kode": "MKN 2521", "nama": "Metodologi Penelitian", "sks": 3}, {"kode": "MKN 2564", "nama": "Pelaksanaan Belanja Negara", "sks": 3}, {"kode": "MKN 2565", "nama": "Pembiayaan dan Investasi Pemerintah", "sks": 3}, {"kode": "MKN 2567", "nama": "Penganggaran Berbasis Kinerja", "sks": 2}, {"kode": "MKN 2568", "nama": "Perpajakan Instansi Pemerintah", "sks": 2}, {"kode": "MKN 2572–77", "nama": "Mata Kuliah Elektif (pilih 1)", "sks": 3}]}}, "6": {"branch": true, "byTrack": {"a": [{"kode": "MKN 2531", "nama": "Akuntansi Pajak", "sks": 3}, {"kode": "MKN 2533", "nama": "Fasilitas Penerimaan Negara", "sks": 2}, {"kode": "MKN 2516", "nama": "Kepemimpinan Sektor Publik", "sks": 2}, {"kode": "MKN 2535", "nama": "Manajemen Penagihan dan Upaya Hukum", "sks": 3}, {"kode": "MKN 2520", "nama": "Manajemen Risiko Keuangan Negara", "sks": 2}, {"kode": "MKN 2545", "nama": "Perpajakan Internasional dan Ekonomi Digital", "sks": 3}, {"kode": "MKN 2547", "nama": "Praktikum Kepabeanan", "sks": 2}, {"kode": "MKN 2548", "nama": "Praktikum Sistem Informasi Penerimaan Negara", "sks": 2}], "b": [{"kode": "MKN 2551", "nama": "Analisis Kebijakan Fiskal Lanjut", "sks": 2}, {"kode": "MKN 2552", "nama": "Analisis Laporan Keuangan Sektor Publik", "sks": 2}, {"kode": "MKN 2516", "nama": "Kepemimpinan Sektor Publik", "sks": 2}, {"kode": "MKN 2557", "nama": "Manajemen Belanja Bendahara Umum Negara", "sks": 2}, {"kode": "MKN 2559", "nama": "Manajemen Keuangan Badan Layanan Umum", "sks": 2}, {"kode": "MKN 2562", "nama": "Manajemen Proyek Pemerintah", "sks": 2}, {"kode": "MKN 2520", "nama": "Manajemen Risiko Keuangan Negara", "sks": 2}, {"kode": "MKN 2563", "nama": "Monitoring dan Evaluasi Anggaran", "sks": 2}, {"kode": "MKN 2569", "nama": "Praktikum Sistem Informasi Keuangan Negara", "sks": 2}]}}, "7": [{"kode": "MKN 2504", "nama": "Magang Wajib", "sks": 20}], "8": {"branch": true, "byTrack": {"a": [{"kode": "MKN 2536", "nama": "Manajemen Penegakan Hukum Penerimaan Negara", "sks": 3}, {"kode": "MKN 2530", "nama": "Tugas Akhir", "sks": 6}], "b": [{"kode": "MKN 2556", "nama": "Manajemen Aset dan Kewajiban", "sks": 3}, {"kode": "MKN 2530", "nama": "Tugas Akhir", "sks": 6}]}}}, "asp": {"1": [{"kode": "ASP 2503", "nama": "Pancasila", "sks": 2}, {"kode": "ASP 2502", "nama": "Bahasa Indonesia", "sks": 2}, {"kode": "ASP 2501", "nama": "Agama", "sks": 2}, {"kode": "ASP 2505", "nama": "Pengantar Pengelolaan Keuangan Negara", "sks": 3}, {"kode": "ASP 2507", "nama": "Pengantar Akuntansi I", "sks": 3}, {"kode": "ASP 2508", "nama": "Ilmu Hukum", "sks": 3}, {"kode": "ASP 2509", "nama": "Pengantar Teknologi Informasi", "sks": 3}], "2": [{"kode": "ASP 2504", "nama": "Kewarganegaraan", "sks": 2, "link": "https://drive.google.com/drive/folders/1BKuxwr_yy8-aDuFJwO2o_l9wMLVF-mts?usp=drive_link"}, {"kode": "ASP 2510", "nama": "Bahasa Inggris I", "sks": 2, "link": "https://drive.google.com/drive/folders/11Dn8miUtAecqSPNQUOtOPHvE74vGBuw4?usp=drive_link"}, {"kode": "ASP 2511", "nama": "Pengantar Akuntansi II", "sks": 3, "link": "https://drive.google.com/drive/folders/1eW11mzJ6vEZb9FkQUiDykwqJm2E-TSzh?usp=drive_link"}, {"kode": "ASP 2512", "nama": "Ekonomi Mikro dan Pengambilan Keputusan Bisnis", "sks": 3, "link": "https://drive.google.com/drive/folders/1EMUCmMvDMACNmQD67Gg4D5tE3nkdKNP1?usp=drive_link"}, {"kode": "ASP 2513", "nama": "Pengantar Akuntansi Pemerintahan", "sks": 2, "link": "https://drive.google.com/drive/folders/1R3pJDDyQ3lb_-z-mb_mLzXEXM0vBP271?usp=drive_link"}, {"kode": "ASP 2514", "nama": "Perpajakan", "sks": 3, "link": "https://drive.google.com/drive/folders/1RJCjcTnZciMOYLGHrDxaS5DoZyU5UTUy?usp=drive_link"}, {"kode": "ASP 2515", "nama": "Statistika Terapan", "sks": 2, "link": "https://drive.google.com/drive/folders/1Ouu4PSHHFsX9LxjMJXbb1iFZyT1lJvpo?usp=drive_link"}], "3": [{"kode": "ASP 2506", "nama": "Ekonomi Makro dan Kebijakan Fiskal", "sks": 3}, {"kode": "ASP 2516", "nama": "Sistem Informasi Akuntansi", "sks": 3}, {"kode": "ASP 2517", "nama": "Perpajakan Lanjutan", "sks": 3}, {"kode": "ASP 2518", "nama": "Akuntansi Pemerintah Daerah", "sks": 3}, {"kode": "ASP 2519", "nama": "Akuntansi Keuangan Menengah BUMN I", "sks": 3}, {"kode": "ASP 2520", "nama": "Akuntansi Biaya Sektor Publik", "sks": 3}, {"kode": "ASP 2521", "nama": "Manajemen Keuangan BUMN", "sks": 3}], "4": [{"kode": "ASP 2522", "nama": "Akuntansi Manajemen Sektor Publik", "sks": 3}, {"kode": "ASP 2523", "nama": "Akuntansi Keuangan Menengah BUMN II", "sks": 3}, {"kode": "ASP 2524", "nama": "Akuntansi Pemerintah Pusat", "sks": 3}, {"kode": "ASP 2525", "nama": "Audit Keuangan Publik dan Komersial", "sks": 3}, {"kode": "ASP 2526", "nama": "Keuangan Publik", "sks": 3}, {"kode": "ASP 2527", "nama": "Analisis Laporan Keuangan Sektor Publik", "sks": 3}, {"kode": "ASP 2528", "nama": "Sistem Pengendalian Manajemen Sektor Publik", "sks": 3}], "5": {"branch": true, "byTrack": {"a": [{"kode": "ASP 2529", "nama": "Analitika Data Keuangan Sektor Publik", "sks": 3}, {"kode": "ASP 2530", "nama": "Praktikum Audit dan TABK", "sks": 3}, {"kode": "ASP 2531", "nama": "Akuntansi Keuangan Holding BUMN I", "sks": 3}, {"kode": "ASP 2532", "nama": "Sistem Informasi Akuntansi Pemerintah", "sks": 3}, {"kode": "ASP 2533", "nama": "Metodologi Penelitian", "sks": 3}, {"kode": "ASP 2541", "nama": "Audit Internal Sektor Publik", "sks": 3}, {"kode": "ASP 2556–58", "nama": "Mata Kuliah Elektif (pilih 1)", "sks": 3}], "b": [{"kode": "ASP 2529", "nama": "Analitika Data Keuangan Sektor Publik", "sks": 3}, {"kode": "ASP 2530", "nama": "Praktikum Audit dan TABK", "sks": 3}, {"kode": "ASP 2531", "nama": "Akuntansi Keuangan Holding BUMN I", "sks": 3}, {"kode": "ASP 2532", "nama": "Sistem Informasi Akuntansi Pemerintah", "sks": 3}, {"kode": "ASP 2533", "nama": "Metodologi Penelitian", "sks": 3}, {"kode": "ASP 2546", "nama": "Proses Bisnis Penerimaan Negara", "sks": 3}, {"kode": "ASP 2556–63", "nama": "Mata Kuliah Elektif (pilih 1)", "sks": 3}], "c": [{"kode": "ASP 2529", "nama": "Analitika Data Keuangan Sektor Publik", "sks": 3}, {"kode": "ASP 2530", "nama": "Praktikum Audit dan TABK", "sks": 3}, {"kode": "ASP 2531", "nama": "Akuntansi Keuangan Holding BUMN I", "sks": 3}, {"kode": "ASP 2532", "nama": "Sistem Informasi Akuntansi Pemerintah", "sks": 3}, {"kode": "ASP 2533", "nama": "Metodologi Penelitian", "sks": 3}, {"kode": "ASP 2551", "nama": "Teknologi Keuangan dan Tata Kelola Sistem Informasi Kontemporer", "sks": 3}, {"kode": "ASP 2556–62", "nama": "Mata Kuliah Elektif (pilih 1)", "sks": 3}]}}, "6": {"branch": true, "byTrack": {"a": [{"kode": "ASP 2534", "nama": "Akuntansi Keuangan Holding BUMN II", "sks": 3}, {"kode": "ASP 2535", "nama": "Manajemen Risiko Sektor Publik", "sks": 3}, {"kode": "ASP 2542", "nama": "Audit Investigasi dan Akuntansi Forensik Keuangan Publik", "sks": 3}, {"kode": "ASP 2543", "nama": "Akuntansi Sektor Publik Kontemporer", "sks": 3}, {"kode": "ASP 2544", "nama": "Audit Sistem Informasi", "sks": 3}, {"kode": "ASP 2545", "nama": "Praktikum Analitika Data untuk Akuntansi dan Audit", "sks": 3}, {"kode": "ASP 2559–61", "nama": "Mata Kuliah Elektif (pilih 1)", "sks": 3}], "b": [{"kode": "ASP 2534", "nama": "Akuntansi Keuangan Holding BUMN II", "sks": 3}, {"kode": "ASP 2535", "nama": "Manajemen Risiko Sektor Publik", "sks": 3}, {"kode": "ASP 2547", "nama": "Audit Investigasi dan Akuntansi Forensik Penerimaan Negara", "sks": 3}, {"kode": "ASP 2548", "nama": "Pengawasan, Pemeriksaan, Penyidikan Penerimaan Negara", "sks": 3}, {"kode": "ASP 2549", "nama": "Analisis Potensi Penerimaan Negara", "sks": 3}, {"kode": "ASP 2550", "nama": "Praktikum Perpajakan", "sks": 3}, {"kode": "ASP 2559–61", "nama": "Mata Kuliah Elektif (pilih 1)", "sks": 3}], "c": [{"kode": "ASP 2534", "nama": "Akuntansi Keuangan Holding BUMN II", "sks": 3}, {"kode": "ASP 2535", "nama": "Manajemen Risiko Sektor Publik", "sks": 3}, {"kode": "ASP 2552", "nama": "Audit Investigasi dan Forensik Keuangan Negara (Teknologi Informasi)", "sks": 3}, {"kode": "ASP 2553", "nama": "Manajemen Proyek Sistem Informasi", "sks": 3}, {"kode": "ASP 2544", "nama": "Audit Sistem Informasi", "sks": 3}, {"kode": "ASP 2554", "nama": "Pengembangan Sistem Informasi Akuntansi", "sks": 3}, {"kode": "ASP 2559–61", "nama": "Mata Kuliah Elektif (pilih 1)", "sks": 3}]}}, "7": [{"kode": "ASP 2555", "nama": "Magang", "sks": 20}, {"kode": "ASP 2540", "nama": "Tugas Akhir (tahap penyusunan)", "sks": 0}], "8": [{"kode": "ASP 2536", "nama": "Teori Akuntansi", "sks": 3}, {"kode": "ASP 2537", "nama": "Kepemimpinan Sektor Publik", "sks": 2}, {"kode": "ASP 2538", "nama": "Bahasa Inggris II", "sks": 2}, {"kode": "ASP 2539", "nama": "Sistem dan Kebijakan Sektor Keuangan", "sks": 2}, {"kode": "ASP 2540", "nama": "Tugas Akhir", "sks": 6}]}, "map": {"1": [{"kode": "MAP 2503", "nama": "Pancasila", "sks": 2}, {"kode": "MAP 2514", "nama": "Pengantar Pengelolaan Keuangan Negara", "sks": 3}, {"kode": "MAP 2505", "nama": "Bahasa Inggris", "sks": 2}, {"kode": "MAP 2510", "nama": "Pengantar Akuntansi I", "sks": 3}, {"kode": "MAP 2512", "nama": "Pengantar Ilmu Ekonomi", "sks": 2}, {"kode": "MAP 2513", "nama": "Pengantar Ilmu Hukum", "sks": 2}, {"kode": "MAP 2527", "nama": "Organisasi dan Tata Kerja Pengelola Aset Publik", "sks": 2}, {"kode": "MAP 2531", "nama": "Pengantar Teknologi Informasi dan Komputer", "sks": 2}], "2": [{"kode": "MAP 2501", "nama": "Agama", "sks": 2, "link": "https://drive.google.com/drive/folders/1KiuaU-jXoFgCya8-z0rr8ev0DFbX43Tc?usp=drive_link"}, {"kode": "MAP 2502", "nama": "Bahasa Indonesia", "sks": 2, "link": "https://drive.google.com/drive/folders/1Y7vTMaebt2HpM4tSlATqwtr6lXEuDpJJ?usp=drive_link"}, {"kode": "MAP 2504", "nama": "Kewarganegaraan", "sks": 2, "link": "https://drive.google.com/drive/folders/1VOtQugzLsPubwHkTERO8qLPNwkCflR8w?usp=drive_link"}, {"kode": "MAP 2507", "nama": "Ekonomi Mikro", "sks": 3, "link": "https://drive.google.com/drive/folders/1SVo-QYb3NEUgr7WFtBpJ6s1UXzUfgCmi?usp=drive_link"}, {"kode": "MAP 2508", "nama": "Hukum Perdata", "sks": 2, "link": "https://drive.google.com/drive/folders/1tKJnxqgnfG_X_T7-k4TPyt0XwPLdWaPD?usp=drive_link"}, {"kode": "MAP 2509", "nama": "Matematika Ekonomi", "sks": 3, "link": "https://drive.google.com/drive/folders/1S5_2AvySeFLBrAQbq6lURInzEr86mdNo?usp=drive_link"}, {"kode": "MAP 2511", "nama": "Pengantar Akuntansi II", "sks": 3, "link": "https://drive.google.com/drive/folders/1SKyRIS7Hu2VSfQ5rtlJQMpFVkutwxuww?usp=drive_link"}, {"kode": "MAP 2533", "nama": "Statistika Terapan Bidang Aset Publik", "sks": 3, "link": "https://drive.google.com/drive/folders/1TFNMqbXrTAIRL3dSwGentuaxUEDhubMZ?usp=drive_link"}], "3": [{"kode": "MAP 2506", "nama": "Ekonomi Makro dan Kebijakan Fiskal", "sks": 3}, {"kode": "MAP 2515", "nama": "Akuntansi Keuangan Menengah I untuk Manajemen Aset Publik", "sks": 3}, {"kode": "MAP 2517", "nama": "Analisis Arus Kas Proyek untuk Penilaian dan Manajemen Kekayaan Negara", "sks": 3}, {"kode": "MAP 2519", "nama": "Analitika Data Keuangan Negara", "sks": 2}, {"kode": "MAP 2521", "nama": "Hukum Agraria dan Properti Kekayaan Negara", "sks": 3}, {"kode": "MAP 2528", "nama": "Pengantar Lelang", "sks": 3}, {"kode": "MAP 2530", "nama": "Pengantar Perpajakan untuk Manajemen Aset Publik", "sks": 2}, {"kode": "MAP 2534", "nama": "Strategi, Perencanaan, dan Pengambilan Keputusan Aset Publik", "sks": 3}], "4": [{"kode": "MAP 2516", "nama": "Akuntansi Keuangan Menengah II untuk Manajemen Aset Publik", "sks": 3}, {"kode": "MAP 2518", "nama": "Analisis Penciptaan Nilai Investasi Pemerintah", "sks": 3}, {"kode": "MAP 2520", "nama": "Ekonomi Wilayah dalam Manajemen Aset Publik", "sks": 3}, {"kode": "MAP 2522", "nama": "Hukum Perusahaan dan Bisnis", "sks": 2}, {"kode": "MAP 2523", "nama": "Implementasi Siklus Hidup Aset Publik", "sks": 3}, {"kode": "MAP 2525", "nama": "Keuangan Publik dalam Pengelolaan Aset", "sks": 3}, {"kode": "MAP 2529", "nama": "Pengantar Penilaian untuk Keuangan Negara", "sks": 3}, {"kode": "MAP 2532", "nama": "Pengelolaan Barang Milik Negara/Daerah", "sks": 2}], "5": {"branch": true, "byTrack": {"a": [{"kode": "MAP 2537", "nama": "Akuntansi Pemerintahan dan Pertanggungjawaban Aset Publik", "sks": 3}, {"kode": "MAP 2538", "nama": "Analisis Kerjasama Pemanfaatan Barang Milik Negara/Daerah", "sks": 2}, {"kode": "MAP 2539", "nama": "Analisis Keuangan untuk Manajemen Kekayaan Negara Dipisahkan", "sks": 3}, {"kode": "MAP 2540", "nama": "Hukum Litigasi Kekayaan Negara", "sks": 2}, {"kode": "MAP 2541", "nama": "Manajemen Investasi Pemerintah", "sks": 3}, {"kode": "MAP 2544", "nama": "Manajemen Piutang Negara", "sks": 2}, {"kode": "MAP 2546", "nama": "Manajemen Risiko Aset Publik", "sks": 2}, {"kode": "MAP 2548", "nama": "Pengadaan Barang dan Jasa Pemerintah", "sks": 2}], "b": [{"kode": "MAP 2551", "nama": "Analisis Highest and Best Use atas Aset Publik", "sks": 2}, {"kode": "MAP 2538", "nama": "Analisis Kerjasama Pemanfaatan Barang Milik Negara/Daerah", "sks": 2}, {"kode": "MAP 2539", "nama": "Analisis Keuangan untuk Manajemen Kekayaan Negara Dipisahkan", "sks": 3}, {"kode": "MAP 2554", "nama": "Penilaian Tujuan Perpajakan dan Investasi Pemerintah – Entitas dan Ekuitas", "sks": 3}, {"kode": "MAP 2556", "nama": "Penilaian Tujuan Perpajakan Objek PBB P5L", "sks": 3}, {"kode": "MAP 2557", "nama": "Praktikum Pengukuran dan Pemetaan Tujuan Perpajakan", "sks": 3}, {"kode": "MAP 2559", "nama": "Praktikum Penilaian Barang Milik Negara Sederhana", "sks": 2}, {"kode": "MAP 2561", "nama": "Struktur Bangunan dan Konstruksi untuk Penilaian Properti", "sks": 3}], "c": [{"kode": "MAP 2562", "nama": "Hukum Administrasi Negara Khusus Lelang", "sks": 2}, {"kode": "MAP 2563", "nama": "Hukum Ekonomi Syariah untuk Lelang", "sks": 2}, {"kode": "MAP 2564", "nama": "Hukum Kepailitan dan PKPU Khusus Lelang", "sks": 2}, {"kode": "MAP 2540", "nama": "Hukum Litigasi Kekayaan Negara", "sks": 2}, {"kode": "MAP 2565", "nama": "Hukum Perdata Kekayaan Negara", "sks": 2}, {"kode": "MAP 2567", "nama": "Hukum Pidana, Hukum Pidana Non-Kodifikasi, dan Pengenalan Jasa Pengguna", "sks": 3}, {"kode": "MAP 2544", "nama": "Manajemen Piutang Negara", "sks": 2}, {"kode": "MAP 2569", "nama": "Pengelolaan Lelang", "sks": 3}]}}, "6": {"branch": true, "byTrack": {"a": [{"kode": "MAP 2524", "nama": "Kepemimpinan Sektor Publik", "sks": 2}, {"kode": "MAP 2526", "nama": "Metodologi Penelitian Tematik Kekayaan/Keuangan Negara", "sks": 3}, {"kode": "MAP 2542", "nama": "Manajemen Kekayaan Negara Lainnya", "sks": 2}, {"kode": "MAP 2543", "nama": "Manajemen Penyediaan Aset Infrastruktur Pemerintah", "sks": 3}, {"kode": "MAP 2545", "nama": "Manajemen Proyek Pemerintah", "sks": 3}, {"kode": "MAP 2547", "nama": "Optimalisasi Barang Milik Negara/Daerah", "sks": 2}, {"kode": "MAP 2549", "nama": "Praktikum Penilaian Tujuan Pengelolaan Barang Milik Negara/Daerah", "sks": 2}, {"kode": "MAP 2550", "nama": "Probity Assurance and Advice atas Aset Publik", "sks": 3}], "b": [{"kode": "MAP 2524", "nama": "Kepemimpinan Sektor Publik", "sks": 2}, {"kode": "MAP 2526", "nama": "Metodologi Penelitian Tematik Kekayaan/Keuangan Negara", "sks": 3}, {"kode": "MAP 2552", "nama": "Penilaian Kekayaan Negara Sumber Daya Alam", "sks": 3}, {"kode": "MAP 2549", "nama": "Praktikum Penilaian Tujuan Pengelolaan Barang Milik Negara/Daerah", "sks": 2}, {"kode": "MAP 2553", "nama": "Penilaian Tujuan Perpajakan dan Investasi Pemerintah – Aset Tak Berwujud", "sks": 2}, {"kode": "MAP 2555", "nama": "Penilaian Tujuan Perpajakan Objek PBB P2", "sks": 3}, {"kode": "MAP 2558", "nama": "Praktikum Penilaian Barang Milik Negara Khusus", "sks": 2}, {"kode": "MAP 2560", "nama": "Sistem Informasi Geografis Aset Negara", "sks": 3}], "c": [{"kode": "MAP 2524", "nama": "Kepemimpinan Sektor Publik", "sks": 2}, {"kode": "MAP 2526", "nama": "Metodologi Penelitian Tematik Kekayaan/Keuangan Negara", "sks": 3}, {"kode": "MAP 2566", "nama": "Hukum Perusahaan dan Bisnis Lanjutan Khusus Lelang", "sks": 3}, {"kode": "MAP 2568", "nama": "Kapita Selekta Lelang", "sks": 2}, {"kode": "MAP 2542", "nama": "Manajemen Kekayaan Negara Lainnya", "sks": 2}, {"kode": "MAP 2570", "nama": "Pengendalian Mutu dan Manajemen Risiko Lelang", "sks": 3}, {"kode": "MAP 2571", "nama": "Penyusunan Risalah Lelang", "sks": 3}, {"kode": "MAP 2572", "nama": "Sistem Aplikasi Pelaksanaan Lelang", "sks": 3}]}}, "7": [{"kode": "MAP —", "nama": "Aktivitas Pembelajaran Merdeka (MBKM, 10–15 SKS)", "sks": 12}, {"kode": "MAP 2535", "nama": "Tugas Akhir Tahap 1", "sks": 3}], "8": [{"kode": "MAP 2573", "nama": "Magang Wajib", "sks": 20}, {"kode": "MAP 2536", "nama": "Tugas Akhir Tahap 2", "sks": 3}]}};
+
+/* ====================== SELESAI EDIT DI SINI ====================== */
+
+const ROMAN = ["I","II","III","IV","V","VI","VII","VIII"];
+let state = { jurusan: "mkn", semester: 1, peminatan: "a" };
+
+function countAll(){
+  let n = 0;
+  for(const j of Object.values(DATA)){
+    for(const s of Object.values(j)){
+      if(Array.isArray(s)) n += s.length;
+      else n += Object.values(s.byTrack)[0].length;
+    }
+  }
+  return n;
+}
+
+function currentSemesterData(){
+  const s = DATA[state.jurusan] && DATA[state.jurusan][state.semester];
+  return s;
+}
+
+function renderJurusanTabs(){
+  const wrap = document.getElementById("jurusan-tabs");
+  wrap.innerHTML = "";
+  JURUSAN_LIST.forEach(j=>{
+    const el = document.createElement("button");
+    el.className = "jtab" + (state.jurusan===j.id ? " active" : "");
+    el.style.setProperty("--accent", j.warna);
+    el.id = "jtab-"+j.id;
+    el.innerHTML = `
+      <div class="kode mono">${j.kode}</div>
+      <div class="nama">${j.nama}</div>
+      <div class="desk">${j.deskripsi}</div>
+    `;
+    el.addEventListener("click", ()=>{
+      state.jurusan = j.id; state.semester = 1; state.peminatan = "a";
+      renderAll();
+    });
+    wrap.appendChild(el);
+  });
+}
+
+function renderSemesterRail(){
+  const wrap = document.getElementById("semester-rail");
+  wrap.innerHTML = "";
+  const accent = JURUSAN_LIST.find(j=>j.id===state.jurusan).warna;
+  for(let s=1; s<=8; s++){
+    const el = document.createElement("button");
+    el.className = "sem-pill" + (state.semester===s ? " active" : "");
+    el.style.setProperty("--accent", accent);
+    el.textContent = "Semester " + ROMAN[s-1];
+    el.addEventListener("click", ()=>{ state.semester = s; state.peminatan = "a"; renderAll(); });
+    wrap.appendChild(el);
+  }
+}
+
+function renderPeminatanRail(){
+  const wrap = document.getElementById("peminatan-rail");
+  wrap.innerHTML = "";
+  const semData = currentSemesterData();
+  if(!semData || Array.isArray(semData) || !semData.branch){ return; }
+  const accent = JURUSAN_LIST.find(j=>j.id===state.jurusan).warna;
+  const opsi = PEMINATAN[state.jurusan] || [];
+  opsi.forEach(p=>{
+    const el = document.createElement("button");
+    el.className = "sem-pill" + (state.peminatan===p.id ? " active" : "");
+    el.style.setProperty("--accent", accent);
+    el.textContent = "Peminatan: " + p.label;
+    el.addEventListener("click", ()=>{ state.peminatan = p.id; renderCourses(); renderPeminatanRail(); });
+    wrap.appendChild(el);
+  });
+}
+
+function renderCourses(){
+  const grid = document.getElementById("course-grid");
+  grid.innerHTML = "";
+  const accent = JURUSAN_LIST.find(j=>j.id===state.jurusan).warna;
+  const semData = currentSemesterData();
+  let list = [];
+  if(semData){
+    if(Array.isArray(semData)) list = semData;
+    else list = semData.byTrack[state.peminatan] || semData.byTrack[Object.keys(semData.byTrack)[0]];
+  }
+  if(!list || list.length === 0){
+    grid.innerHTML = `<div class="empty-state">Belum ada data mata kuliah untuk semester ini.</div>`;
+    return;
+  }
+  list.forEach(c=>{
+    const card = document.createElement("div");
+    card.className = "course-card";
+    card.style.setProperty("--accent", accent);
+    const link = c.link || MASTER_DRIVE_LINK;
+    card.innerHTML = `
+      <div class="course-top">
+        <span class="course-kode mono">${c.kode}</span>
+        <span class="course-sks mono">${c.sks} SKS</span>
+      </div>
+      <div class="course-name">${c.nama}</div>
+      <a class="course-link" href="${link}" target="_blank" rel="noopener">
+        Buka Materi
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 14L14 6M8 6h6v6"/></svg>
+      </a>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderAll(){
+  renderJurusanTabs();
+  renderSemesterRail();
+  renderPeminatanRail();
+  renderCourses();
+}
+
+document.getElementById("nav-drive").href = MASTER_DRIVE_LINK;
+document.getElementById("hero-drive-btn").href = MASTER_DRIVE_LINK;
+document.getElementById("footer-drive").href = MASTER_DRIVE_LINK;
+document.getElementById("stat-matkul").textContent = countAll();
+document.getElementById("year").textContent = new Date().getFullYear();
+
+document.querySelectorAll("[data-jump]").forEach(a=>{
+  a.addEventListener("click", (e)=>{
+    e.preventDefault();
+    state.jurusan = a.dataset.jump; state.semester = 1; state.peminatan = "a";
+    renderAll();
+    document.getElementById("pilih-jurusan").scrollIntoView({behavior:"smooth"});
+  });
+});
+
+renderAll();
+</script>
+</body>
+</html>
